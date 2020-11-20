@@ -1,0 +1,111 @@
+package com.client;
+
+import com.command.Command;
+import com.console.ConsoleCommandManage;
+import com.console.Login;
+import com.handle.*;
+import com.handle.code.PacketDecoder;
+import com.handle.code.PacketEncoder;
+import com.handle.response.CreatGroupResponseHandle;
+import com.handle.response.JoinGroupResponseHandle;
+import com.handle.response.LoginResponseHandler;
+import com.handle.response.MessageResponseHandler;
+import com.handle.resquest.JoinGroupResquestHandle;
+import com.protocol.packet.request.LoginRequestPacket;
+import com.protocol.packet.request.MessageRequestPacket;
+import com.util.SessionUtil;
+import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.channel.socket.nio.NioSocketChannel;
+
+import java.util.Scanner;
+
+/**
+ * @Class NettyClient
+ * @Desc Todo
+ * @Author CJQ
+ * @Class 2020/11/17 14:53
+ **/
+public class NettyClient {
+
+    private static final int MAX_RETRY = 5;
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 8080;
+
+
+    public static void main(String[] args) {
+
+        NioEventLoopGroup workGroup = new NioEventLoopGroup();
+        Bootstrap bootstrap = new Bootstrap();
+
+        bootstrap
+                .group(workGroup)
+                .channel(NioSocketChannel.class)
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
+                .option(ChannelOption.SO_KEEPALIVE, true)
+                .option(ChannelOption.TCP_NODELAY, true)
+                .handler(new ChannelInitializer<SocketChannel>() {
+                    @Override
+                    protected void initChannel(SocketChannel ch) throws Exception {
+                        ch.pipeline().addLast(new Spliter());
+                        ch.pipeline().addLast(new PacketDecoder());
+                        ch.pipeline().addLast(new LoginResponseHandler());
+                        ch.pipeline().addLast(new MessageResponseHandler());
+                        ch.pipeline().addLast(new CreatGroupResponseHandle());
+                        ch.pipeline().addLast(new JoinGroupResponseHandle());
+                        //TODO：客户端一般先解码
+                        ch.pipeline().addLast(new PacketEncoder());
+                    }
+                });
+        connect(bootstrap,HOST, PORT, MAX_RETRY);
+
+    }
+
+    private static void connect(Bootstrap bootstrap, String host, int port, int maxRetry) {
+
+        bootstrap.connect(host,port).addListener(future -> {
+            //连接成功
+           if(future.isSuccess()){
+               ChannelFuture channelFuture = (ChannelFuture) future;
+               Channel channel = channelFuture.channel();
+               System.out.println("连接成功，启动控制台程序。。。");
+               startConsoleThread(channel);
+           }
+//           //连接次数用完
+//           else if(maxRetry == 0){
+//
+//           }
+//           //处理连接次数
+//           else {
+//
+//           }
+        });
+
+
+    }
+
+    private static void startConsoleThread(Channel channel) {
+        Scanner sc = new Scanner(System.in);
+
+        ConsoleCommandManage commandManage = new ConsoleCommandManage();
+        Login login = new Login();
+        new Thread(() -> {
+            while (!Thread.interrupted()) {
+                if (!SessionUtil.hasLogin(channel)) {
+                    login.exec(sc,channel);
+                } else {
+                    //System.out.println("请输出操作指令：");
+                    commandManage.exec(sc,channel);
+                }
+            }
+        }).start();
+    }
+
+
+
+}
