@@ -2,14 +2,8 @@ package com.protocol;
 
 
 import com.protocol.packet.*;
-import com.protocol.packet.request.CreatGroupRequestPacket;
-import com.protocol.packet.request.JoinGroupRequestPacket;
-import com.protocol.packet.request.LoginRequestPacket;
-import com.protocol.packet.request.MessageRequestPacket;
-import com.protocol.packet.response.CreatGroupResponsePacket;
-import com.protocol.packet.response.JoinGroupResponsePacket;
-import com.protocol.packet.response.LoginResponsePacket;
-import com.protocol.packet.response.MessageResponsePacket;
+import com.protocol.packet.request.*;
+import com.protocol.packet.response.*;
 import com.serialize.Serialize;
 import com.serialize.SerializeImpl;
 import io.netty.buffer.ByteBuf;
@@ -49,7 +43,10 @@ public class PacketCodeC {
         packetTypeMap.put(CREAT_GROUP_RESPONSE, CreatGroupResponsePacket.class);
         packetTypeMap.put(JOIN_GROUP_REQUEST, JoinGroupRequestPacket.class);
         packetTypeMap.put(JOIN_GROUP_RESPONSE, JoinGroupResponsePacket.class);
-
+        packetTypeMap.put(LEFT_GROUP_REQUEST, LeftGroupResquestPacket.class);
+        packetTypeMap.put(LEFT_GROUP_RESPONSE, LeftGroupResponsePacket.class);
+        packetTypeMap.put(GET_GROUPNUM_REQUEST,GetGroupResquestPacket.class);
+        packetTypeMap.put(GET_GROUPNUM_RESPONSE,GetGroupResponsePacket.class);
 
 
         //初始化序列化算法

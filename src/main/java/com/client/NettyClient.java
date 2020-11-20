@@ -1,18 +1,11 @@
 package com.client;
 
-import com.command.Command;
-import com.console.ConsoleCommandManage;
-import com.console.Login;
+import com.console.detailcommand.ConsoleCommandManage;
+import com.console.detailcommand.Login;
 import com.handle.*;
 import com.handle.code.PacketDecoder;
 import com.handle.code.PacketEncoder;
-import com.handle.response.CreatGroupResponseHandle;
-import com.handle.response.JoinGroupResponseHandle;
-import com.handle.response.LoginResponseHandler;
-import com.handle.response.MessageResponseHandler;
-import com.handle.resquest.JoinGroupResquestHandle;
-import com.protocol.packet.request.LoginRequestPacket;
-import com.protocol.packet.request.MessageRequestPacket;
+import com.handle.response.*;
 import com.util.SessionUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -58,6 +51,8 @@ public class NettyClient {
                         ch.pipeline().addLast(new MessageResponseHandler());
                         ch.pipeline().addLast(new CreatGroupResponseHandle());
                         ch.pipeline().addLast(new JoinGroupResponseHandle());
+                        ch.pipeline().addLast(new LeftGroupResponseHandle());
+                        ch.pipeline().addLast(new GetGroupResponseHandle());
                         //TODO：客户端一般先解码
                         ch.pipeline().addLast(new PacketEncoder());
                     }

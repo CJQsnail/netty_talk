@@ -4,10 +4,7 @@ import com.handle.AuthHandler;
 import com.handle.Spliter;
 import com.handle.code.PacketDecoder;
 import com.handle.code.PacketEncoder;
-import com.handle.resquest.CreatGroupResquestHandle;
-import com.handle.resquest.JoinGroupResquestHandle;
-import com.handle.resquest.LoginRequestHandler;
-import com.handle.resquest.MessageRequestHandler;
+import com.handle.resquest.*;
 import com.sun.corba.se.internal.CosNaming.BootstrapServer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
@@ -53,6 +50,8 @@ public class NettyService {
                         ch.pipeline().addLast(new MessageRequestHandler());
                         ch.pipeline().addLast(new CreatGroupResquestHandle());
                         ch.pipeline().addLast(new JoinGroupResquestHandle());
+                        ch.pipeline().addLast(new LeftGroupResquestHandle());
+                        ch.pipeline().addLast(new GetGroupResquestHandle());
                         ch.pipeline().addLast(new PacketEncoder());
                     }
                 });

@@ -24,4 +24,12 @@ public interface Command {
 
     Byte JOIN_GROUP_RESPONSE = 8;
 
+    Byte LEFT_GROUP_REQUEST= 9;
+
+    Byte LEFT_GROUP_RESPONSE = 10;
+
+    Byte GET_GROUPNUM_REQUEST= 11;
+
+    Byte GET_GROUPNUM_RESPONSE = 12;
+
 }

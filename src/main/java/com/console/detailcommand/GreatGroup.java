@@ -1,6 +1,7 @@
-package com.console;
+package com.console.detailcommand;
 
 
+import com.console.ConsoleCommand;
 import com.protocol.packet.request.CreatGroupRequestPacket;
 import io.netty.channel.Channel;
 
@@ -14,7 +15,7 @@ import java.util.Scanner;
  * @Author CJQ
  * @Class 2020/11/19 14:31
  **/
-public class GreatGroup implements ConsoleCommand{
+public class GreatGroup implements ConsoleCommand {
 
     private final String SPLIT_FLAG = ",";
 

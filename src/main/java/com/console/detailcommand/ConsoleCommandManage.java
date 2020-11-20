@@ -1,6 +1,7 @@
-package com.console;
+package com.console.detailcommand;
 
 
+import com.console.ConsoleCommand;
 import io.netty.channel.Channel;
 
 import java.util.HashMap;
@@ -22,8 +23,9 @@ public class ConsoleCommandManage implements ConsoleCommand {
         commandMap.put("logout",new Logout());
         commandMap.put("cg",new GreatGroup());
         commandMap.put("login",new Login());
-        commandMap.put("jg",new JoinGroupConsoleCommand());
-        commandMap.put("lg",new LeftGroupConsoleCommand());
+        commandMap.put("jg",new JoinGroup());
+        commandMap.put("lg",new LeftGroup());
+        commandMap.put("getNum",new GetGroupNum());
     }
 
 

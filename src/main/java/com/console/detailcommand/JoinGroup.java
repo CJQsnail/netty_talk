@@ -1,18 +1,19 @@
-package com.console;
+package com.console.detailcommand;
 
 import com.command.Command;
+import com.console.ConsoleCommand;
 import com.protocol.packet.request.JoinGroupRequestPacket;
 import io.netty.channel.Channel;
 
 import java.util.Scanner;
 
 /**
- * @Class JoinGroupConsoleCommand
+ * @Class JoinGroup
  * @Desc Todo
  * @Author CJQ
  * @Class 2020/11/19 16:19
  **/
-public class JoinGroupConsoleCommand implements ConsoleCommand {
+public class JoinGroup implements ConsoleCommand {
 
     @Override
     public void exec(Scanner scanner, Channel channel) {

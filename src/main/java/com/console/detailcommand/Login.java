@@ -1,5 +1,6 @@
-package com.console;
+package com.console.detailcommand;
 
+import com.console.ConsoleCommand;
 import com.protocol.packet.request.LoginRequestPacket;
 import io.netty.channel.Channel;
 
@@ -12,7 +13,7 @@ import java.util.Scanner;
  * @Author CJQ
  * @Class 2020/11/19 14:42
  **/
-public class Login implements ConsoleCommand{
+public class Login implements ConsoleCommand {
 
     @Override
     public void exec(Scanner scanner, Channel channel) {

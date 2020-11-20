@@ -1,6 +1,7 @@
-package com.console;
+package com.console.detailcommand;
 
 
+import com.console.ConsoleCommand;
 import io.netty.channel.Channel;
 
 import java.util.Scanner;
@@ -11,7 +12,7 @@ import java.util.Scanner;
  * @Author CJQ
  * @Class 2020/11/19 14:30
  **/
-public class Logout implements ConsoleCommand{
+public class Logout implements ConsoleCommand {
     @Override
     public void exec(Scanner scanner, Channel channel) {
 

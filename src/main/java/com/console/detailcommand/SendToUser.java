@@ -1,5 +1,6 @@
-package com.console;
+package com.console.detailcommand;
 
+import com.console.ConsoleCommand;
 import com.protocol.packet.request.MessageRequestPacket;
 import io.netty.channel.Channel;
 
@@ -11,7 +12,7 @@ import java.util.Scanner;
  * @Author CJQ
  * @Class 2020/11/19 14:30
  **/
-public class SendToUser implements ConsoleCommand{
+public class SendToUser implements ConsoleCommand {
 
 
     @Override
