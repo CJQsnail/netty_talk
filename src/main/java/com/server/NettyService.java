@@ -52,6 +52,7 @@ public class NettyService {
                         ch.pipeline().addLast(new JoinGroupResquestHandle());
                         ch.pipeline().addLast(new LeftGroupResquestHandle());
                         ch.pipeline().addLast(new GetGroupResquestHandle());
+                        ch.pipeline().addLast(new GroupMessageRequestHandler());
                         ch.pipeline().addLast(new PacketEncoder());
                     }
                 });

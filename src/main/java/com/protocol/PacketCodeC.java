@@ -47,6 +47,9 @@ public class PacketCodeC {
         packetTypeMap.put(LEFT_GROUP_RESPONSE, LeftGroupResponsePacket.class);
         packetTypeMap.put(GET_GROUPNUM_REQUEST,GetGroupResquestPacket.class);
         packetTypeMap.put(GET_GROUPNUM_RESPONSE,GetGroupResponsePacket.class);
+        packetTypeMap.put(GROUP_MESSAGE_REQUEST,GroupMessageRequestPacket.class);
+        packetTypeMap.put(GROUP_MESSAGE_RESPONSE,GroupMessageResponsePacket.class);
+
 
 
         //初始化序列化算法

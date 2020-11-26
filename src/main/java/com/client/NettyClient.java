@@ -53,6 +53,7 @@ public class NettyClient {
                         ch.pipeline().addLast(new JoinGroupResponseHandle());
                         ch.pipeline().addLast(new LeftGroupResponseHandle());
                         ch.pipeline().addLast(new GetGroupResponseHandle());
+                        ch.pipeline().addLast(new GroupMessageResponseHandler());
                         //TODO：客户端一般先解码
                         ch.pipeline().addLast(new PacketEncoder());
                     }

@@ -32,4 +32,9 @@ public interface Command {
 
     Byte GET_GROUPNUM_RESPONSE = 12;
 
+    Byte GROUP_MESSAGE_REQUEST = 13;
+
+    Byte GROUP_MESSAGE_RESPONSE = 14;
+
+
 }
